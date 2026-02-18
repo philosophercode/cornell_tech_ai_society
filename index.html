@@ -44,7 +44,7 @@
     <div class="h-0.5 w-full bg-neutral-200"></div>
 
     <!-- Header -->
-    <header id="header" class="sticky top-0 z-20 backdrop-blur supports-[backdrop-filter]:bg-white/70 transition-all duration-300">
+    <header id="header" class="sticky top-0 z-20 backdrop-blur supports-[backdrop-filter]:bg-white/70 transition-all duration-300 -translate-y-full opacity-0">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
             <div class="flex items-center gap-4">
                 <img id="nav-logo" src="assets/CTAIS logo high res.png" alt="Cornell Tech AI Society Logo" class="h-12 w-auto transition-all duration-300 opacity-0">
@@ -61,19 +61,19 @@
 
     <!-- Hero -->
     <section class="relative">
-        <div class="mx-auto max-w-6xl px-4 py-20 md:py-32">
+        <div class="mx-auto max-w-6xl px-4 py-10 md:py-32">
             <!-- Hero Content with Logo -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-12 items-center mb-8 md:mb-16">
                 <!-- Logo -->
                 <div class="lg:col-span-1 flex justify-center lg:justify-start">
-                    <img src="assets/CTAIS logo.png" alt="Cornell Tech AI Society Logo" class="h-64 md:h-80 w-auto">
+                    <img src="assets/CTAIS logo.png" alt="Cornell Tech AI Society Logo" class="h-36 md:h-80 w-auto">
                 </div>
                 <!-- Text Content -->
                 <div class="lg:col-span-2 text-center lg:text-left">
-                    <h1 class="text-5xl md:text-6xl font-semibold tracking-[-0.02em] leading-[1.1] mb-6">
+                    <h1 class="text-3xl md:text-6xl font-semibold tracking-[-0.02em] leading-[1.1] mb-4 md:mb-6">
                         Human + AI: Expanding Cornell Tech beyond the class into an <span class="inline-block border-b border-neutral-300 pb-1">AI Society</span>.
                     </h1>
-                    <p class="text-xl text-neutral-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    <p class="text-base md:text-xl text-neutral-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                         The Cornell Tech AI Society is a student‑run community where students from all backgrounds
                         learn, discuss, and build with AI — exploring both the technical and human sides of artificial intelligence.
                     </p>
@@ -81,7 +81,7 @@
             </div>
 
             <!-- CTA Buttons -->
-            <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+            <div class="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-8 md:mb-16">
                 <a
                     href="mailto:ai-society-l-request@cornell.edu?subject=join"
                     class="inline-flex items-center gap-2 rounded-full border border-neutral-900 px-6 py-3 text-sm font-medium hover:bg-neutral-900 hover:text-white transition"
@@ -101,12 +101,12 @@
 
             <!-- Next Up Section -->
             <div class="max-w-2xl mx-auto">
-                <div class="rounded-2xl border border-neutral-200 p-8">
-                    <h3 class="text-lg font-medium text-neutral-700 mb-6 text-center">Next Up</h3>
-                    <div class="space-y-5">
+                <div class="rounded-2xl border border-neutral-200 p-5 md:p-8">
+                    <h3 class="text-base md:text-lg font-medium text-neutral-700 mb-4 md:mb-6 text-center">Next Up</h3>
+                    <div class="space-y-4 md:space-y-5">
                         <div class="text-center">
-                            <a href="https://nocodeworks.dev/sessions/personal-ai-os" class="font-semibold text-lg hover:text-ncw transition-colors">Beyond Chatbots: Build Your Personal AI Operating System</a>
-                            <p class="text-neutral-600 mt-2">Techniques for managing context and building reusable AI workflows</p>
+                            <a href="https://nocodeworks.dev/sessions/personal-ai-os" class="font-semibold text-base md:text-lg hover:text-ncw transition-colors">Beyond Chatbots: Build Your Personal AI Operating System</a>
+                            <p class="text-neutral-600 mt-1.5 md:mt-2 text-sm md:text-base">Techniques for managing context and building reusable AI workflows</p>
                         </div>
                         <div class="flex justify-center gap-6 text-sm text-neutral-600">
                             <span>📅 Fri, Feb 20 · 5:00 PM</span>
@@ -254,20 +254,22 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Scroll effect for header
+        // Scroll effect for header — hidden until user scrolls past hero
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
             const logo = document.getElementById('nav-logo');
             const textLogo = document.getElementById('nav-text');
-            
+
             if (window.scrollY > 100) {
-                header.classList.add('bg-white/95', 'shadow-sm');
+                header.classList.remove('-translate-y-full', 'opacity-0');
+                header.classList.add('bg-white/95', 'shadow-sm', 'translate-y-0', 'opacity-100');
                 logo.classList.add('h-8', 'opacity-100');
                 logo.classList.remove('h-12', 'opacity-0');
                 textLogo.classList.add('h-6', 'opacity-100');
                 textLogo.classList.remove('h-8', 'opacity-0');
             } else {
-                header.classList.remove('bg-white/95', 'shadow-sm');
+                header.classList.add('-translate-y-full', 'opacity-0');
+                header.classList.remove('bg-white/95', 'shadow-sm', 'translate-y-0', 'opacity-100');
                 logo.classList.remove('h-8', 'opacity-100');
                 logo.classList.add('h-12', 'opacity-0');
                 textLogo.classList.remove('h-6', 'opacity-100');
