@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>AI Society · you're invited</title>
+<meta name="description" content="A free evening workshop: walk in with a resume, leave with a live portfolio site. No coding required.">
+<meta property="og:title" content="You're invited: build your portfolio with AI">
+<meta property="og:description" content="One evening. Bring a resume, leave with a live site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23F2EEE6' stroke='%23232220' stroke-width='4'/%3E%3Ctext x='50' y='66' font-size='46' text-anchor='middle' font-family='Georgia' fill='%23232220'%3Ep%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#F2EEE6; --card:#F7F4EE; --ink:#232220; --ink-2:#5B5850; --mute:#9A9689; --line:#E1DCCE;
+  --green:#6FA88A; --orange:#D9713C; --purple:#7B6FCC; --mustard:#C89B3C;
+  --serif:'Source Serif 4',Georgia,serif; --sans:Inter,-apple-system,sans-serif; --hand:Caveat,cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 var(--sans);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+a{color:var(--purple);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:4px}
+.page{max-width:700px;margin:0 auto;padding:56px 20px 40px}
+
+
+/* header */
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-bottom:64px;border-bottom:1px solid var(--line)}
+h1{font:400 36px/1.15 var(--serif);margin:0;letter-spacing:-.01em}
+.typed{font:500 34px var(--hand);color:var(--green);margin-left:10px;white-space:nowrap}
+.typed::after{content:"";display:inline-block;width:2px;height:28px;background:currentColor;margin-left:2px;vertical-align:-4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.stamp{flex:none;width:76px;height:76px;border-radius:50%;border:1.5px dashed var(--orange);color:var(--orange);display:grid;place-content:center;text-align:center;transform:rotate(-8deg);transition:transform .4s cubic-bezier(.3,1.6,.5,1);cursor:default}
+.stamp:hover{transform:rotate(6deg) scale(1.06)}
+.stamp b{display:block;font:600 11px var(--sans);letter-spacing:.08em}
+.stamp span{display:block;font:600 26px/1 var(--serif)}
+@media(max-width:560px){header{align-items:flex-start}h1{font-size:30px}.typed{display:block;margin:4px 0 0;font-size:30px;white-space:normal}}
+
+/* rows */
+.row{display:grid;grid-template-columns:170px 1fr;gap:0 0;padding:44px 0;border-bottom:1px solid var(--line)}
+.lbl{display:flex;align-items:center;gap:8px;color:var(--mute);font-size:14px;align-self:center}
+.lbl svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
+.row.top .lbl{align-self:start;padding-top:2px}
+@media(max-width:620px){.row{grid-template-columns:1fr;gap:14px}.lbl{align-self:start}}
+p{margin:0}
+.body{color:var(--ink-2)}
+.num{color:var(--green);font-weight:600}
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* the afternoon */
+.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
+.hand{font:700 44px/1.05 var(--hand);color:var(--orange);margin:0 0 22px}
+.aft{display:grid;grid-template-columns:170px 1fr;padding:44px 0;border-bottom:1px solid var(--line)}
+@media(max-width:620px){.aft{grid-template-columns:1fr}.mini{margin-bottom:24px}}
+.mini{width:132px;align-self:end;margin-bottom:6px;border:1.5px solid var(--ink);border-radius:10px;background:var(--card);overflow:hidden;box-shadow:4px 4px 0 var(--line)}
+.mini .bar{display:flex;gap:4px;align-items:center;padding:6px 7px;border-bottom:1.5px solid var(--ink)}
+.mini .bar i{width:5px;height:5px;border-radius:50%;background:var(--mute)}
+.mini .bar em{flex:1;margin-left:4px;height:7px;border-radius:4px;background:var(--line);font:normal 600 6px/7px var(--sans);color:transparent;text-align:center;transition:background .3s,color .3s}
+.mini[data-s="5"] .bar em{background:var(--green);color:#fff}
+.mini .vp{position:relative;height:118px;padding:9px}
+.mini .s{transition:opacity .35s,transform .35s;opacity:0;transform:translateY(4px)}
+.mini .s.on{opacity:1;transform:none}
+.m-q{position:absolute;inset:0;display:grid;place-items:center;font:700 40px var(--hand);color:var(--mute);transition:opacity .3s}
+.m-prompt{height:16px;border:1px dashed var(--mute);border-radius:5px;font:500 9px/14px var(--sans);padding-left:4px;color:var(--ink-2);overflow:hidden;white-space:nowrap}
+.m-hero{display:flex;gap:6px;align-items:center;margin-top:8px}
+.m-av{width:22px;height:22px;border-radius:50%;background:var(--line);transition:background .3s}
+.m-ln{height:5px;border-radius:3px;background:var(--line);margin:3px 0;transition:background .3s}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:9px}
+.m-grid div{height:26px;border-radius:5px;background:var(--line);transition:background .3s}
+.mini.color .m-av{background:var(--purple)}
+.mini.color .m-ln.a{background:var(--ink)}
+.mini.color .m-grid div:nth-child(1){background:var(--orange)}
+.mini.color .m-grid div:nth-child(2){background:var(--green)}
+.steps{list-style:none;margin:0;padding:0}
+.steps li{display:grid;grid-template-columns:80px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .3s}
+.steps li:last-child{border-bottom:0}
+.steps .t{font-size:13px;font-weight:600;padding-top:2px;color:var(--mustard)}
+.steps li:nth-child(even) .t{color:var(--green)}
+.steps h3{font:500 16px var(--sans);margin:0}
+.steps p{font-size:14px;color:var(--ink-2)}
+.steps .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}
+.steps .more > div{overflow:hidden}
+.steps li.on .more{grid-template-rows:1fr}
+.steps li:not(.on){opacity:.55}
+.steps li:hover{opacity:1}
+.new{font:700 17px var(--hand);color:var(--orange);margin-left:6px}
+
+/* details */
+dl{margin:0;display:grid;grid-template-columns:90px 1fr;gap:8px 12px}
+dt{color:var(--mute)}
+dd{margin:0}
+.count{margin-top:16px;font-size:14px;color:var(--ink-2)}
+.count b{font:700 22px var(--hand);color:var(--purple);font-variant-numeric:tabular-nums}
+
+/* quiz */
+.quiz{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:20px}
+.quiz .top{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--ink-2)}
+.score{font:700 22px var(--hand);color:var(--purple);white-space:nowrap}
+.prompt{font:400 19px/1.4 var(--serif);margin:16px 0 18px;min-height:54px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.b{border:1px solid var(--line);background:var(--bg);color:var(--ink);font:500 14px var(--sans);padding:9px 15px;border-radius:8px;cursor:pointer;transition:transform .15s,border-color .2s}
+.b:hover{border-color:var(--ink)}
+.b:active{transform:scale(.96)}
+.b.go{background:var(--orange);border-color:var(--orange);color:#fff}
+.b.go:hover{filter:brightness(1.05)}
+.fb{font:600 22px/1.2 var(--hand);margin-top:14px;min-height:26px}
+.fb.yes{color:var(--green)} .fb.no{color:var(--orange)}
+.fb small{display:block;font:400 14px/1.5 var(--sans);color:var(--ink-2);margin-top:2px}
+
+/* form */
+.intro{margin-bottom:14px;color:var(--ink-2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.grid2{grid-template-columns:1fr}}
+label.f{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:5px}
+input,select{width:100%;font:15px var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px 12px;transition:border-color .2s}
+input:focus,select:focus{outline:none;border-color:var(--ink)}
+select option{background:var(--bg)}
+.fld{margin-bottom:10px}
+.hp{position:absolute;left:-9999px}
+.err{color:var(--orange);font-size:13px;min-height:18px;margin:2px 0 8px}
+.done{display:none}
+.done.show{display:block;animation:pop .5s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.done .hand{color:var(--green);margin-bottom:8px}
+
+footer{display:flex;justify-content:space-between;padding-top:30px;font-size:12px;color:var(--mute)}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<main class="page">
+  <header>
+    <h1>you're invited to <span class="typed" id="typed" aria-live="off">AI Society's first workshop</span></h1>
+    <div class="stamp" aria-label="Workshop date"><b data-cfg="month"></b><span data-cfg="day"></span></div>
+  </header>
+
+  <section class="row reveal">
+    <div class="lbl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg>the gist</div>
+    <p class="body">The <span style="color:var(--ink)">AI Society</span>'s first meeting. One evening, <span class="num">zero</span> lines of code. Walk in with your resume, leave with a <span class="num">live</span> portfolio site and a link to share. We'll use AI tools like <a href="https://v0.app" target="_blank" rel="noopener">v0</a> to build it, polish it, and put it online, together.</p>
+  </section>
+
+  <section class="aft reveal">
+    <div class="mini" id="mini" data-s="0" aria-hidden="true">
+      <div class="bar"><i></i><i></i><i></i><em>live</em></div>
+      <div class="vp">
+        <div class="m-q" id="mq">?</div>
+        <div class="s" data-n="2"><div class="m-prompt" id="mp">make me a portfolio…</div></div>
+        <div class="s m-hero" data-n="3"><div class="m-av"></div><div style="flex:1"><div class="m-ln a" style="width:80%"></div><div class="m-ln" style="width:55%"></div></div></div>
+        <div class="s m-grid" data-n="3"><div></div><div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="kicker">the evening</div>
+      <p class="hand">resume in, website out</p>
+      <ul class="steps" id="steps"></ul>
+    </div>
+  </section>
+
+  <section class="row top reveal">
+    <div class="lbl"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>details</div>
+    <div>
+      <dl>
+        <dt>When</dt><dd><span data-cfg="dateLabel"></span>, <span data-cfg="timeLabel"></span></dd>
+        <dt>Where</dt><dd data-cfg="location"></dd>
+        <dt>Bring</dt><dd>Laptop, charger, resume</dd>
+        <dt>Cost</dt><dd>Free</dd>
+      </dl>
+      <p class="count" id="count"></p>
+    </div>
+  </section>
+
+  <section class="row top reveal">
+    <div class="lbl"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>host</div>
+    <p class="body"><span style="color:var(--ink)" data-cfg="host"></span> <span data-cfg="hostBio"></span></p>
+  </section>
+
+  <section class="row top reveal">
+    <div class="lbl"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>warm-up</div>
+    <div class="quiz">
+      <div class="top"><span>Good prompt, or needs work? Tap your guess.</span><span class="score" id="score">0 / 6</span></div>
+      <div id="qBody">
+        <p class="prompt" id="qText"></p>
+        <div class="btns" id="qBtns">
+          <button class="b" type="button" data-a="good">Good prompt</button>
+          <button class="b" type="button" data-a="bad">Needs work</button>
+        </div>
+        <p class="fb" id="qFb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row top reveal" id="signup">
+    <div class="lbl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>sign up</div>
+    <div>
+      <form id="form" novalidate>
+        <p class="intro">Save a seat. We'll send a reminder and a 10-minute prep list before the day.</p>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="grid2">
+          <div class="fld"><label class="f" for="fName">Name</label><input id="fName" name="name" placeholder="Your name" autocomplete="name"></div>
+          <div class="fld"><label class="f" for="fEmail">Email</label><input id="fEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email"></div>
+        </div>
+        <div class="fld"><label class="f" for="fStage">Your program</label>
+          <select id="fStage" name="stage">
+            <option value="">Choose one</option>
+            <option>Johnson Cornell Tech MBA</option><option>MEng in Computer Science</option><option>MEng in Data Science and Decision Analytics</option><option>MEng in Electrical and Computer Engineering</option><option>MEng in Operations Research and Information Engineering</option><option>MS in Information Systems: Connective Media</option><option>MS in Information Systems: Health Tech</option><option>MS in Information Systems: Urban Tech</option><option>MS in Design Technology</option><option>LLM in Law, Technology, and Entrepreneurship</option><option>PhD</option><option>Other</option>
+          </select>
+        </div>
+        <p class="err" id="err" aria-live="polite"></p>
+        <button class="b go" type="submit" id="send">Save my seat</button>
+      </form>
+      <div class="done" id="done" aria-live="polite">
+        <p class="hand" id="doneT">see you there!</p>
+        <p class="body" id="doneM" style="margin-bottom:14px"></p>
+        <div class="btns"><button class="b" type="button" id="ics">Add to calendar</button><button class="b" type="button" id="share">Invite a friend</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer><span>AI Society · Portfolio Lab</span><span data-cfg="year"></span></footer>
+</main>
+
+<script>
+/* ========= EDIT ME ========= */
+const CONFIG = {
+  eventName: "AI Society first meeting: build your portfolio with AI",
+  start: "2026-10-16T17:00:00-04:00",   // start, with timezone offset
+  end:   "2026-10-16T19:00:00-04:00",
+  dateLabel: "Friday, Oct 16",
+  timeLabel: "5–7 PM ET",
+  month: "OCT", day: "16", year: "2026",
+  location: "Room TBA",
+  host: "Pranav Dhingra.",
+  hostBio: "Engineer turned PM (formerly Senior PM at Grubhub) and Cornell Tech alum.",
+  formEndpoint: "https://script.google.com/macros/s/AKfycbwgVaMSU_jfMBqq3xEXk-_I3YCyJxg-8AjkTvdZKVzxnUJCUgoi7SrKBYOj0Gcbkbc/exec",   // Google Sheet sign-ups
+  contactEmail: "you@example.com"       // used when formEndpoint is empty
+};
+/* =========================== */
+
+const $ = s => document.querySelector(s);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const store = {get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+document.querySelectorAll("[data-cfg]").forEach(el => el.textContent = CONFIG[el.dataset.cfg] || "");
+
+/* typewriter */
+const phrases = ["AI Society's first workshop","portfolio making with AI"];
+(async () => {
+  const el = $("#typed"); if (reduce) return;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  let i = 0;
+  for (;;) {
+    await wait(2200);
+    for (let t = el.textContent; t.length; t = t.slice(0, -1)) { el.textContent = t.slice(0, -1); await wait(35); }
+    i = (i + 1) % phrases.length;
+    for (const ch of phrases[i]) { el.textContent += ch; await wait(70); }
+  }
+})();
+
+/* scroll reveal */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.15});
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+/* the afternoon: timeline drives the mini browser */
+const STEPS = [
+  ["5:00","AI Society intro","Who we are, what we're building this year, and how to get involved.",0],
+  ["5:15","Why build, why now","Ideas are cheap to test now. Why a working site beats a resume bullet.",0],
+  ["5:25","Prompt like a pro","Specific, with context and structure. Build the hero first, then the rest.",2],
+  ["5:40","Build lab","Most of the evening. We'll walk you through the tools step by step: paste your resume into the template and iterate.",3],
+  ["6:35","Ship it","Deploy to Vercel or GitHub Pages, add a domain and analytics.",4],
+  ["6:50","Demo showcase","Show your site in 60 seconds. Everyone leaves with a link.",5]
+];
+const tags = ["first meeting!","","","","","new!"];
+$("#steps").innerHTML = STEPS.map((s,i) => `<li tabindex="0" data-i="${i}"><span class="t">${s[0]}</span><div><h3>${s[1]}${tags[i] ? `<span class="new">${tags[i]}</span>` : ""}</h3><div class="more"><div><p>${s[2]}</p></div></div></div></li>`).join("");
+const mini = $("#mini");
+function stage(i){
+  document.querySelectorAll("#steps li").forEach((li,j) => li.classList.toggle("on", j === i));
+  const s = STEPS[i][3];
+  mini.dataset.s = s;
+  $("#mq").style.opacity = s < 2 ? 1 : 0;
+  $("#mq").textContent = s === 1 ? "v0?" : "?";
+  mini.querySelectorAll(".s").forEach(el => el.classList.toggle("on", s >= +el.dataset.n));
+  mini.classList.toggle("color", s >= 4);
+  $("#mp").textContent = s >= 3 ? "hero: name, tagline, CTA ✓" : "make me a portfolio…";
+}
+$("#steps").addEventListener("mouseover", e => { const li = e.target.closest("li"); if (li) stage(+li.dataset.i); });
+$("#steps").addEventListener("click", e => { const li = e.target.closest("li"); if (li) stage(+li.dataset.i); });
+$("#steps").addEventListener("focusin", e => { const li = e.target.closest("li"); if (li) stage(+li.dataset.i); });
+stage(0);
+
+/* countdown */
+function tick(){
+  const ms = new Date(CONFIG.start) - Date.now();
+  if (ms <= 0){ $("#count").innerHTML = new Date(CONFIG.end) > Date.now() ? "<b>happening now</b>" : "That's a wrap. Thanks for coming!"; return; }
+  const d = Math.floor(ms/864e5), h = Math.floor(ms/36e5)%24, m = Math.floor(ms/6e4)%60;
+  $("#count").innerHTML = `Starts in <b>${d}d ${h}h ${m}m</b>`;
+}
+tick(); setInterval(tick, 30000);
+
+/* warm-up quiz */
+const Q = [
+  ["Make it look nice.","bad","Too vague. Say what \"nice\" means: layout, color, type."],
+  ["Create a hero section with my name, a one-line tagline, and a \"Contact me\" button.","good","Clear and specific. The AI knows exactly what to build."],
+  ["Build my entire website.","bad","Break it down: hero first, then projects, then about."],
+  ["I'm a PM targeting fintech roles. Lead with my data-driven wins.","good","Context changes everything about the output."],
+  ["Here are two portfolios I love. Match their spacing and type, not their colors.","good","Few-shot: examples plus what to take from them."],
+  ["Make a portfolio.","bad","Who is it for? What should it show? Add your story."]
+];
+let qi = 0, score = 0, locked = false;
+function showQ(){
+  locked = false;
+  if (qi >= Q.length){
+    $("#qText").textContent = score === Q.length ? "Perfect score. You're ready." : `You got ${score} of ${Q.length}. We'll sharpen the rest on the day.`;
+    $("#qBtns").innerHTML = '<button class="b go" type="button" data-a="again">Play again</button>';
+    $("#qFb").className = "fb"; $("#qFb").textContent = "";
+    return;
+  }
+  $("#qFb").className = "fb"; $("#qFb").textContent = "";
+  $("#qText").textContent = `“${Q[qi][0]}”`;
+  $("#qBtns").innerHTML = '<button class="b" type="button" data-a="good">Good prompt</button><button class="b" type="button" data-a="bad">Needs work</button>';
+}
+$("#qBtns").addEventListener("click", e => {
+  const a = e.target.closest("button")?.dataset.a; if (!a) return;
+  if (a === "again"){ qi = 0; score = 0; $("#score").textContent = `0 / ${Q.length}`; return showQ(); }
+  if (locked) return; locked = true;
+  const ok = a === Q[qi][1]; if (ok) score++;
+  $("#score").textContent = `${score} / ${Q.length}`;
+  $("#qFb").className = "fb " + (ok ? "yes" : "no");
+  $("#qFb").textContent = ok ? "yep!" : "not quite.";
+  qi++;
+  setTimeout(showQ, 2500);
+});
+showQ();
+
+/* sign up */
+const form = $("#form");
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const fd = new FormData(form), err = $("#err"); err.textContent = "";
+  if (fd.get("_gotcha")) return;
+  const name = (fd.get("name") || "").trim(), email = (fd.get("email") || "").trim(), stage = fd.get("stage") || "";
+  if (!name) { err.textContent = "Add your name."; return $("#fName").focus(); }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = "That email doesn't look right. Check for typos."; return $("#fEmail").focus(); }
+  const btn = $("#send"); btn.disabled = true; btn.textContent = "Saving…";
+  const data = {name, email, stage, signedUpAt: new Date().toISOString()};
+  let viaEmail = false;
+  try {
+    if (CONFIG.formEndpoint) {
+      const gs = CONFIG.formEndpoint.includes("script.google.com");
+      const body = gs ? new URLSearchParams(data) : new FormData();
+      if (!gs) Object.entries(data).forEach(([k,v]) => body.append(k, v));
+      const res = await fetch(CONFIG.formEndpoint, {method:"POST", body, mode: gs ? "no-cors" : "cors", headers: gs ? {} : {Accept:"application/json"}});
+      if (!gs && !res.ok) throw new Error();
+    } else {
+      viaEmail = true;
+      location.href = `mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent("Workshop sign-up: " + name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProgram: ${stage}`)}`;
+    }
+    store.set("plab-signed", name);
+    done(name, viaEmail);
+  } catch(_) {
+    err.textContent = "Couldn't save your seat. Check your connection and try again.";
+    btn.disabled = false; btn.textContent = "Save my seat";
+  }
+});
+function done(name, viaEmail){
+  form.style.display = "none";
+  $("#done").classList.add("show");
+  $("#doneT").textContent = `see you there, ${name.split(/\s+/)[0].toLowerCase()}!`;
+  $("#doneM").textContent = viaEmail ? "Your email app just opened with your details. Hit send to lock in your seat." : "You're on the list. Add it to your calendar so it doesn't sneak up on you.";
+}
+const prior = store.get("plab-signed"); if (prior) done(prior, false);
+$("#ics").onclick = () => {
+  const f = d => new Date(d).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  const t = s => s.replace(/([,;\\])/g,"\\$1");
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Portfolio Lab//EN","BEGIN:VEVENT","UID:"+Date.now()+"@portfoliolab","DTSTAMP:"+f(Date.now()),"DTSTART:"+f(CONFIG.start),"DTEND:"+f(CONFIG.end),"SUMMARY:"+t(CONFIG.eventName),"LOCATION:"+t(CONFIG.location),"DESCRIPTION:"+t("Bring a laptop, charger and resume. "+location.href.split("#")[0]),"END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ics],{type:"text/calendar"})); a.download = "portfolio-lab.ics"; document.body.appendChild(a); a.click(); a.remove();
+};
+$("#share").onclick = async () => {
+  const url = location.href.split("#")[0], b = $("#share");
+  if (navigator.share) { try { await navigator.share({title: CONFIG.eventName, url}); } catch(_){} return; }
+  try { await navigator.clipboard.writeText(url); b.textContent = "Link copied"; } catch(_) { b.textContent = url; }
+  setTimeout(() => b.textContent = "Invite a friend", 2000);
+};
+</script>
+</body>
+</html>
