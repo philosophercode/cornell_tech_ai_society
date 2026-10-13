@@ -1,5 +1,4 @@
 // Shared site nav. Include on every page with <script src="/assets/nav.js"></script> right after <body>.
-// Pages can tint it with the CSS variable --nav-bg.
 (function () {
   const LINKS = [
     { href: "/workshop/", label: "Workshop" },
@@ -9,7 +8,7 @@
 
   const style = document.createElement("style");
   style.textContent = `
-    .site-nav{position:sticky;top:0;z-index:50;border-bottom:1px solid #e5e5e5;background:var(--nav-bg,rgba(255,255,255,.9));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-family:Inter,system-ui,sans-serif}
+    .site-nav{position:sticky;top:0;z-index:50;border-bottom:1px solid #e5e5e5;background:#fff;font-family:Inter,system-ui,sans-serif}
     .site-nav .in{max-width:64rem;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
     .site-nav .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
     .site-nav .brand img:first-child{height:32px;width:auto}
