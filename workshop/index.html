@@ -142,6 +142,34 @@ footer{display:flex;justify-content:space-between;padding-top:30px;font-size:12p
     <div class="stamp" aria-label="Workshop date"><b data-cfg="month"></b><span data-cfg="day"></span></div>
   </header>
 
+  <section class="row top" id="signup">
+    <div class="lbl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>sign up</div>
+    <div>
+      <form id="form" novalidate>
+        <p class="intro" id="intro">Save a seat. We'll send a reminder and a 10-minute prep list before the day.</p>
+        <p class="spots" id="spots" hidden></p>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="grid2">
+          <div class="fld"><label class="f" for="fName">Name</label><input id="fName" name="name" placeholder="Your name" autocomplete="name"></div>
+          <div class="fld"><label class="f" for="fEmail">Email</label><input id="fEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email"></div>
+        </div>
+        <div class="fld"><label class="f" for="fStage">Your program</label>
+          <select id="fStage" name="stage">
+            <option value="">Choose one</option>
+            <option>Johnson Cornell Tech MBA</option><option>MEng in Computer Science</option><option>MEng in Data Science and Decision Analytics</option><option>MEng in Electrical and Computer Engineering</option><option>MEng in Operations Research and Information Engineering</option><option>MS in Information Systems: Connective Media</option><option>MS in Information Systems: Health Tech</option><option>MS in Information Systems: Urban Tech</option><option>MS in Design Technology</option><option>LLM in Law, Technology, and Entrepreneurship</option><option>PhD</option><option>Other</option>
+          </select>
+        </div>
+        <p class="err" id="err" aria-live="polite"></p>
+        <button class="b go" type="submit" id="send">Save my seat</button>
+      </form>
+      <div class="done" id="done" aria-live="polite">
+        <p class="hand" id="doneT">see you there!</p>
+        <p class="body" id="doneM" style="margin-bottom:14px"></p>
+        <div class="btns"><button class="b" type="button" id="ics">Add to calendar</button><button class="b" type="button" id="share">Invite a friend</button></div>
+      </div>
+    </div>
+  </section>
+
   <section class="row reveal">
     <div class="lbl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg>the gist</div>
     <p class="body">The <span style="color:var(--ink)">AI Society</span>'s first meeting. One evening, <span class="num">zero</span> lines of code. Walk in with your resume, leave with a <span class="num">live</span> portfolio site and a link to share. We'll use AI tools like <a href="https://v0.app" target="_blank" rel="noopener">v0</a> to build it, polish it, and put it online, together.</p>
@@ -193,34 +221,6 @@ footer{display:flex;justify-content:space-between;padding-top:30px;font-size:12p
           <button class="b" type="button" data-a="bad">Needs work</button>
         </div>
         <p class="fb" id="qFb" aria-live="polite"></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="row top reveal" id="signup">
-    <div class="lbl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>sign up</div>
-    <div>
-      <form id="form" novalidate>
-        <p class="intro" id="intro">Save a seat. We'll send a reminder and a 10-minute prep list before the day.</p>
-        <p class="spots" id="spots" hidden></p>
-        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="grid2">
-          <div class="fld"><label class="f" for="fName">Name</label><input id="fName" name="name" placeholder="Your name" autocomplete="name"></div>
-          <div class="fld"><label class="f" for="fEmail">Email</label><input id="fEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email"></div>
-        </div>
-        <div class="fld"><label class="f" for="fStage">Your program</label>
-          <select id="fStage" name="stage">
-            <option value="">Choose one</option>
-            <option>Johnson Cornell Tech MBA</option><option>MEng in Computer Science</option><option>MEng in Data Science and Decision Analytics</option><option>MEng in Electrical and Computer Engineering</option><option>MEng in Operations Research and Information Engineering</option><option>MS in Information Systems: Connective Media</option><option>MS in Information Systems: Health Tech</option><option>MS in Information Systems: Urban Tech</option><option>MS in Design Technology</option><option>LLM in Law, Technology, and Entrepreneurship</option><option>PhD</option><option>Other</option>
-          </select>
-        </div>
-        <p class="err" id="err" aria-live="polite"></p>
-        <button class="b go" type="submit" id="send">Save my seat</button>
-      </form>
-      <div class="done" id="done" aria-live="polite">
-        <p class="hand" id="doneT">see you there!</p>
-        <p class="body" id="doneM" style="margin-bottom:14px"></p>
-        <div class="btns"><button class="b" type="button" id="ics">Add to calendar</button><button class="b" type="button" id="share">Invite a friend</button></div>
       </div>
     </div>
   </section>
