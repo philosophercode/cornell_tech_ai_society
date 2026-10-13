@@ -51,12 +51,47 @@
 
         <!-- Upcoming workshop -->
         <section class="pt-8">
-            <a href="/workshop/" class="group block rounded-2xl border border-neutral-900 p-6 transition hover:bg-neutral-900 hover:text-white md:p-8">
-                <p class="mb-2 text-xs font-medium uppercase tracking-widest text-neutral-500 group-hover:text-neutral-300">Upcoming · Fri, Oct 16 · 5–7 PM</p>
-                <h2 class="mb-2 text-2xl font-semibold">First workshop: build your portfolio with AI</h2>
-                <p class="mb-4 text-neutral-600 group-hover:text-neutral-300">One evening, zero lines of code. Walk in with a resume, leave with a live portfolio site. Seats are limited.</p>
-                <span class="text-sm font-medium">Save your seat →</span>
-            </a>
+            <div class="grid gap-6 rounded-2xl border border-neutral-900 p-6 md:grid-cols-5 md:p-8">
+                <div class="md:col-span-2">
+                    <p class="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-500">Upcoming workshop</p>
+                    <div class="mb-4 flex items-center gap-4">
+                        <div class="flex h-20 w-20 flex-none flex-col items-center justify-center rounded-xl bg-neutral-900 text-white">
+                            <span class="text-xs font-semibold tracking-widest">OCT</span>
+                            <span class="text-3xl font-semibold leading-none">16</span>
+                        </div>
+                        <div>
+                            <p class="text-xl font-semibold">Friday</p>
+                            <p class="text-xl font-semibold">5–7 PM ET</p>
+                        </div>
+                    </div>
+                    <h2 class="mb-2 text-2xl font-semibold">Build your portfolio with AI</h2>
+                    <p class="text-neutral-600">One evening, zero lines of code. Walk in with a resume, leave with a live portfolio site. Free · seats are limited.</p>
+                </div>
+
+                <div class="md:col-span-3">
+                    <form id="signup-form" class="space-y-3" novalidate>
+                        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+                        <div class="grid gap-3 sm:grid-cols-2">
+                            <label class="block text-sm"><span class="mb-1 block text-neutral-600">Name</span>
+                                <input name="name" autocomplete="name" placeholder="Your name" class="w-full rounded-lg border border-neutral-300 px-3 py-2.5 focus:border-neutral-900 focus:outline-none"></label>
+                            <label class="block text-sm"><span class="mb-1 block text-neutral-600">Email</span>
+                                <input name="email" type="email" autocomplete="email" placeholder="you@cornell.edu" class="w-full rounded-lg border border-neutral-300 px-3 py-2.5 focus:border-neutral-900 focus:outline-none"></label>
+                        </div>
+                        <label class="block text-sm"><span class="mb-1 block text-neutral-600">Your program</span>
+                            <select name="stage" class="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2.5 focus:border-neutral-900 focus:outline-none"><option value="">Choose one</option><option>Johnson Cornell Tech MBA</option><option>MEng in Computer Science</option><option>MEng in Data Science and Decision Analytics</option><option>MEng in Electrical and Computer Engineering</option><option>MEng in Operations Research and Information Engineering</option><option>MS in Information Systems: Connective Media</option><option>MS in Information Systems: Health Tech</option><option>MS in Information Systems: Urban Tech</option><option>MS in Design Technology</option><option>LLM in Law, Technology, and Entrepreneurship</option><option>PhD</option><option>Other</option></select></label>
+                        <p id="signup-error" class="min-h-[1.25rem] text-sm text-red-600" aria-live="polite"></p>
+                        <div class="flex flex-wrap gap-3">
+                            <button type="submit" id="signup-submit" class="rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-700 disabled:opacity-60">Submit</button>
+                            <a href="/workshop/" class="rounded-full border border-neutral-300 px-6 py-3 text-sm font-medium text-neutral-700 transition hover:border-neutral-900">Learn more</a>
+                        </div>
+                    </form>
+                    <div id="signup-done" class="hidden" aria-live="polite">
+                        <p id="signup-done-title" class="mb-2 text-2xl font-semibold"></p>
+                        <p id="signup-done-msg" class="mb-4 text-neutral-600"></p>
+                        <a href="/workshop/" class="inline-block rounded-full border border-neutral-300 px-6 py-3 text-sm font-medium text-neutral-700 transition hover:border-neutral-900">Learn more</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Hero -->
@@ -111,5 +146,6 @@
     </footer>
 
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <script src="assets/signup.js"></script>
 </body>
 </html>
