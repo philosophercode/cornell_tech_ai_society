@@ -4,7 +4,7 @@
 
 The Cornell Tech AI Society is a student-run community at Cornell University's NYC campus where students from all backgrounds learn, discuss, and build with AI — exploring both the technical and human sides of artificial intelligence.
 
-**Live site:** [cornell-tech-ai-society.vercel.app](https://aisocietycornell.tech/)
+**Live site:** [aisocietycornell.tech](https://aisocietycornell.tech/)
 
 ## Get Involved
 
