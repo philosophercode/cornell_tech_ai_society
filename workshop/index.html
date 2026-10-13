@@ -113,6 +113,8 @@ dd{margin:0}
 
 /* form */
 .intro{margin-bottom:14px;color:var(--ink-2)}
+.spots{font-size:14px;color:var(--ink-2);margin:0 0 14px}
+.spots b{font:700 22px var(--hand);color:var(--purple)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:520px){.grid2{grid-template-columns:1fr}}
 label.f{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:5px}
@@ -199,7 +201,8 @@ footer{display:flex;justify-content:space-between;padding-top:30px;font-size:12p
     <div class="lbl"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>sign up</div>
     <div>
       <form id="form" novalidate>
-        <p class="intro">Save a seat. We'll send a reminder and a 10-minute prep list before the day.</p>
+        <p class="intro" id="intro">Save a seat. We'll send a reminder and a 10-minute prep list before the day.</p>
+        <p class="spots" id="spots" hidden></p>
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="grid2">
           <div class="fld"><label class="f" for="fName">Name</label><input id="fName" name="name" placeholder="Your name" autocomplete="name"></div>
@@ -238,7 +241,8 @@ const CONFIG = {
   host: "Pranav Dhingra.",
   hostBio: "Engineer turned PM (formerly Senior PM at Grubhub) and Cornell Tech alum.",
   formEndpoint: "https://script.google.com/macros/s/AKfycbwgVaMSU_jfMBqq3xEXk-_I3YCyJxg-8AjkTvdZKVzxnUJCUgoi7SrKBYOj0Gcbkbc/exec",   // Google Sheet sign-ups
-  contactEmail: "you@example.com"       // used when formEndpoint is empty
+  contactEmail: "you@example.com",      // used when formEndpoint is empty
+  limit: 40                             // seats; must match LIMIT in the Google Apps Script
 };
 /* =========================== */
 
@@ -347,32 +351,72 @@ form.addEventListener("submit", async e => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = "That email doesn't look right. Check for typos."; return $("#fEmail").focus(); }
   const btn = $("#send"); btn.disabled = true; btn.textContent = "Saving…";
   const data = {name, email, stage, signedUpAt: new Date().toISOString()};
-  let viaEmail = false;
+  let viaEmail = false, result = {};
   try {
     if (CONFIG.formEndpoint) {
       const gs = CONFIG.formEndpoint.includes("script.google.com");
       const body = gs ? new URLSearchParams(data) : new FormData();
       if (!gs) Object.entries(data).forEach(([k,v]) => body.append(k, v));
-      const res = await fetch(CONFIG.formEndpoint, {method:"POST", body, mode: gs ? "no-cors" : "cors", headers: gs ? {} : {Accept:"application/json"}});
-      if (!gs && !res.ok) throw new Error();
+      if (gs) {
+        try {
+          const res = await fetch(CONFIG.formEndpoint, {method:"POST", body});
+          result = await res.json();
+        } catch(_) {
+          // Older script without a readable reply: send it anyway and assume it was saved
+          await fetch(CONFIG.formEndpoint, {method:"POST", body: new URLSearchParams(data), mode:"no-cors"});
+        }
+      } else {
+        const res = await fetch(CONFIG.formEndpoint, {method:"POST", body, headers:{Accept:"application/json"}});
+        if (!res.ok) throw new Error();
+      }
     } else {
       viaEmail = true;
       location.href = `mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent("Workshop sign-up: " + name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nProgram: ${stage}`)}`;
     }
-    store.set("plab-signed", name);
-    done(name, viaEmail);
+    const status = result.full ? "waitlist" : result.already ? "already" : "in";
+    store.set("plab-signed", JSON.stringify({name, status}));
+    done(name, viaEmail, status);
+    loadSpots();
   } catch(_) {
     err.textContent = "Couldn't save your seat. Check your connection and try again.";
-    btn.disabled = false; btn.textContent = "Save my seat";
+    btn.disabled = false; btn.textContent = $("#spots").textContent.startsWith("All") ? "Join the waitlist" : "Save my seat";
   }
 });
-function done(name, viaEmail){
+function done(name, viaEmail, status){
+  const first = name.split(/\s+/)[0].toLowerCase();
   form.style.display = "none";
   $("#done").classList.add("show");
-  $("#doneT").textContent = `see you there, ${name.split(/\s+/)[0].toLowerCase()}!`;
-  $("#doneM").textContent = viaEmail ? "Your email app just opened with your details. Hit send to lock in your seat." : "You're on the list. Add it to your calendar so it doesn't sneak up on you.";
+  if (status === "waitlist") {
+    $("#doneT").textContent = `you're on the waitlist, ${first}`;
+    $("#doneM").textContent = "All 40 seats are taken. We'll email you if one opens up.";
+  } else if (status === "already") {
+    $("#doneT").textContent = `you're already in, ${first}!`;
+    $("#doneM").textContent = "That email is already signed up, so your seat is saved. See you Friday.";
+  } else {
+    $("#doneT").textContent = `see you there, ${first}!`;
+    $("#doneM").textContent = viaEmail ? "Your email app just opened with your details. Hit send to lock in your seat." : "You're on the list. Add it to your calendar so it doesn't sneak up on you.";
+  }
 }
-const prior = store.get("plab-signed"); if (prior) done(prior, false);
+const priorRaw = store.get("plab-signed");
+if (priorRaw) { let p; try { p = JSON.parse(priorRaw); } catch(_) { p = {name: priorRaw, status: "in"}; } if (p && p.name) done(p.name, false, p.status); }
+
+/* seats left (needs the updated Google Apps Script; stays hidden otherwise) */
+async function loadSpots(){
+  if (!CONFIG.formEndpoint.includes("script.google.com")) return;
+  try {
+    const r = await fetch(CONFIG.formEndpoint, {cache: "no-store"}).then(x => x.json());
+    if (typeof r.remaining !== "number") return;
+    const el = $("#spots");
+    el.hidden = false;
+    if (r.remaining <= 0) {
+      el.innerHTML = "<b>All " + CONFIG.limit + " seats are taken.</b> Join the waitlist and we'll email you if one opens.";
+      $("#send").textContent = "Join the waitlist";
+    } else {
+      el.innerHTML = "<b>" + r.remaining + " of " + CONFIG.limit + " seats left</b>";
+    }
+  } catch(_) {}
+}
+loadSpots();
 $("#ics").onclick = () => {
   const f = d => new Date(d).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
   const t = s => s.replace(/([,;\\])/g,"\\$1");
