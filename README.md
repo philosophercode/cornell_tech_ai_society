@@ -20,6 +20,10 @@ The Cornell Tech AI Society is a student-run community at Cornell University's N
 - Creative galleries (GenAI art, media)
 - Hackathons & collaborative builds
 
+## Contributing
+
+Repo lives in the [Cornell-Tech-AI-Society](https://github.com/Cornell-Tech-AI-Society) org. Pushes to `main` deploy automatically via Vercel. No build step — open `index.html` in a browser to preview.
+
 ## Tech Stack
 
 - Static HTML + [Tailwind CSS](https://tailwindcss.com) (via CDN)
@@ -29,6 +33,7 @@ The Cornell Tech AI Society is a student-run community at Cornell University's N
 ## Project Structure
 
 ```
-index.html          # Main site (single page)
+index.html          # Landing page
+workshop/index.html # Workshop invite + sign-up (edit CONFIG at the top of its <script>)
 assets/             # Logos and images
 ```
